@@ -10,25 +10,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Ping Supabase REST API
+      - name: Ping Supabase
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: |
-          echo "Pinging: $SUPABASE_URL"
-
           response=$(curl -s -o response_body.txt -w "%{http_code}" \
-            "${SUPABASE_URL}/rest/v1/?apikey=${SUPABASE_ANON_KEY}" \
-            -H "apikey: ${SUPABASE_ANON_KEY}" \
-            -H "Authorization: Bearer ${SUPABASE_ANON_KEY}")
+            "${SUPABASE_URL}/auth/v1/health" \
+            -H "apikey: ${SUPABASE_ANON_KEY}")
 
           echo "HTTP Status: $response"
-          echo "Response body:"
           cat response_body.txt
 
-          if [ "$response" -eq 200 ] || [ "$response" -eq 401 ] || [ "$response" -eq 404 ]; then
-            echo "✅ Supabase is reachable (status $response)"
+          if [ "$response" -eq 200 ]; then
+            echo "✅ Supabase is healthy!"
           else
-            echo "❌ Supabase unreachable"
+            echo "❌ Unexpected status: $response"
             exit 1
           fi
