@@ -29,8 +29,35 @@
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet" />
+    
+    <style>
+      /* Hide fallback ligature text before font loads to prevent layout shift and broken text */
+      .material-symbols-outlined {
+        visibility: hidden;
+      }
+      .icons-loaded .material-symbols-outlined {
+        visibility: visible;
+      }
+    </style>
+
+    <script>
+      (function() {
+        if (document.fonts) {
+          // Detect when the icon font is loaded, then reveal icons
+          document.fonts.load('1em Material Symbols Outlined').then(function() {
+            document.documentElement.classList.add('icons-loaded');
+          }).catch(function() {
+            document.documentElement.classList.add('icons-loaded');
+          });
+        } else {
+          document.documentElement.classList.add('icons-loaded');
+        }
+      })();
+    </script>
     
     <!-- Tailwind Configuration -->
     <script id="tailwind-config">
@@ -132,7 +159,7 @@
     <style>
       /* Keep the scrollbar custom layout or reset styles here if necessary */
     </style>
-    <script type="module" crossorigin src="/assets/index-UYJLxX4y.js"></script>
+    <script type="module" crossorigin src="/assets/index-L4hGSA1D.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-Drk_zmfE.css">
   </head>
   <body>
