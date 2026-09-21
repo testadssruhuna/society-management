@@ -216,7 +216,7 @@
     <style>
       /* Keep the scrollbar custom layout or reset styles here if necessary */
     </style>
-    <script type="module" crossorigin src="/assets/index-B6Df8Fj3.js"></script>
+    <script type="module" crossorigin src="/assets/index-TbyJeN9I.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-mgVyyUq5.css">
   </head>
   <body>
@@ -227,9 +227,9 @@
         var theme = localStorage.getItem('theme') || 'dark';
         document.documentElement.style.background = theme === 'dark' ? '#08090a' : '#fafafa';
 
-        // If visiting /login and already have a cached session, redirect immediately (before React loads)
+        // If visiting /login or /register and already have a cached session, redirect immediately (before React loads)
         var path = window.location.pathname;
-        if (path === '/login') {
+        if (path === '/login' || path === '/register') {
           try {
             var auth = localStorage.getItem('adss-auth');
             var profile = localStorage.getItem('adss-profile-cache');
